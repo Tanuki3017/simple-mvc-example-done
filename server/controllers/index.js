@@ -91,14 +91,12 @@ const hostPage3 = (req, res) => {
   res.render('page3');
 };
 
-const hostPage4 = async (req, res) =>{
-  try{
+const hostPage4 = async (req, res) => {
+  try {
     const docs = await Dog.find({}).lean().exec();
 
     return res.render('page4', { dogs: docs });
-  }
-
-  catch (err) {
+  } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'failed to find dogs' });
   }
@@ -325,12 +323,9 @@ const searchDogName = async (req, res) => {
   // Increases the dogs age everytime it is found
   doc.age++;
 
-  try{
+  try {
     await doc.save();
-  }
-
-  // If something goes wrong saving to the database, log the error and send a message to the client.
-  catch (err) {
+  } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'failed to create dog' });
   }
@@ -360,5 +355,5 @@ module.exports = {
   setDogName,
   updateLastDog,
   searchDogName,
-  notFound
+  notFound,
 };
